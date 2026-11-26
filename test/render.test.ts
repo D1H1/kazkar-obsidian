@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { autoLink, convertRefs, frontmatter, LinkMap, mergeUserNotes, sanitizeFileName, typeFolder, USER_NOTES_MARKER } from "../src/render";
-import { parseRpcBody } from "../src/client";
+import { extractApiKey, parseRpcBody } from "../src/client";
 
 const links: LinkMap = {
   campaign: "Kazkar/Bell/Bell",
@@ -64,5 +64,14 @@ describe("parseRpcBody", () => {
   it("parses SSE with multiple data lines and skips notifications", () => {
     const sse = 'event: message\ndata: {"jsonrpc":"2.0","method":"notifications/progress"}\n\nevent: message\ndata: {"jsonrpc":"2.0",\ndata: "id":1,"result":{"isError":false}}\n\n';
     expect(parseRpcBody(sse).result).toEqual({ isError: false });
+  });
+});
+
+describe("extractApiKey", () => {
+  it("accepts a bare key, a connection URL, or a bearer header", () => {
+    expect(extractApiKey("  kzk_mcp_AbC-12_x  ")).toBe("kzk_mcp_AbC-12_x");
+    expect(extractApiKey("https://kazkar.ai/api/mcp?key=kzk_mcp_AbC-12_x")).toBe("kzk_mcp_AbC-12_x");
+    expect(extractApiKey("Authorization: Bearer kzk_mcp_AbC-12_x")).toBe("kzk_mcp_AbC-12_x");
+    expect(extractApiKey(" other ")).toBe("other");
   });
 });

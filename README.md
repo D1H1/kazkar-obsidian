@@ -28,9 +28,11 @@ Kazkar/
 
 ## Setup
 
+Full walkthrough with screenshots: [kazkar.ai/documentation/obsidian-sync](https://kazkar.ai/documentation/obsidian-sync?utm_source=obsidian&utm_medium=readme&utm_campaign=obsidian_plugin).
+
 1. Sign in at [kazkar.ai](https://kazkar.ai/?utm_source=obsidian&utm_medium=readme&utm_campaign=obsidian_plugin) with Discord. Every plan works, including Free.
-2. Go to **Dashboard → Connections** and create a key. A read-only key is enough.
-3. In Obsidian, open **Settings → Kazkar**, paste the key and click **Test connection**.
+2. Go to **Connections**, choose **Something else** and click **Create key & copy**.
+3. In Obsidian, open **Settings → Kazkar**, paste it (the whole connection URL is fine; the plugin picks out the key) and click **Test connection**.
 4. Run **Kazkar: Sync all campaigns** from the command palette, or click the scroll icon in the ribbon.
 
 Optional: turn on **Sync on startup**, switch off campaigns you don't want, or change the target folder.

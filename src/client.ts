@@ -12,6 +12,15 @@ export interface HttpResponse {
 /** POST transport. Injected so the plugin can use Obsidian's requestUrl (no CORS) and tests can use fetch. */
 export type HttpPost = (url: string, headers: Record<string, string>, body: string) => Promise<HttpResponse>;
 
+/**
+ * Accept either a bare key or anything containing one. Kazkar's Connections page
+ * copies a full connection URL (https://kazkar.ai/api/mcp?key=kzk_mcp_…).
+ */
+export function extractApiKey(input: string): string {
+  const m = input.match(/kzk_mcp_[A-Za-z0-9_-]+/);
+  return m ? m[0] : input.trim();
+}
+
 export class KazkarAuthError extends Error {}
 export class KazkarApiError extends Error {}
 

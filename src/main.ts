@@ -10,7 +10,7 @@ import {
   TFile,
   TFolder,
 } from "obsidian";
-import { HttpPost, KazkarAuthError, KazkarClient } from "./client";
+import { extractApiKey, HttpPost, KazkarAuthError, KazkarClient } from "./client";
 import { SITE_URL } from "./render";
 import { syncCampaign, SyncStats, VaultAdapter } from "./sync";
 import type { Campaign } from "./types";
@@ -136,7 +136,7 @@ export default class KazkarPlugin extends Plugin {
   }
 
   setApiKey(key: string): void {
-    this.app.secretStorage.setSecret(SECRET_ID, key.trim());
+    this.app.secretStorage.setSecret(SECRET_ID, extractApiKey(key));
   }
 
   client(): KazkarClient | null {
@@ -245,17 +245,17 @@ class KazkarSettingTab extends PluginSettingTab {
     containerEl.empty();
 
     const intro = containerEl.createEl("p");
-    intro.appendText("Kazkar records your tabletop RPG sessions and writes the recaps and lore wiki. Get an API key from ");
-    intro.createEl("a", { text: "Kazkar → Dashboard → Connections", href: CONNECTIONS_URL });
-    intro.appendText(" (read-only is enough).");
+    intro.appendText("Kazkar records your tabletop RPG sessions and writes the recaps and lore wiki. To connect, open ");
+    intro.createEl("a", { text: "Connections on Kazkar", href: CONNECTIONS_URL });
+    intro.appendText(", choose \"Something else\", click \"Create key & copy\" and paste it below.");
 
     new Setting(containerEl)
       .setName("API key")
-      .setDesc("Stored in Obsidian's secret storage, not in the plugin's data file.")
+      .setDesc("Paste the key or the whole connection URL. Stored in Obsidian's secret storage, not in the plugin's data file.")
       .addText((text) => {
         text.inputEl.type = "password";
         text
-          .setPlaceholder("kzk_mcp_…")
+          .setPlaceholder("Paste your key or connection URL")
           .setValue(this.plugin.getApiKey())
           .onChange((value) => this.plugin.setApiKey(value));
       })
