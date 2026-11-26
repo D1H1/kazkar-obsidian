@@ -282,7 +282,6 @@ export function renderCampaignIndex(
       gm: campaign.author ?? undefined,
       tags: ["kazkar", "kazkar/campaign"],
     }),
-    `# ${campaign.name}`,
   ];
   const meta: string[] = [];
   if (campaign.system) meta.push(campaign.system);
