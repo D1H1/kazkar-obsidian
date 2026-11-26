@@ -29,7 +29,7 @@ export const recaps: Record<string, SessionRecap> = {
     narrative: "Mira waded into Drowned Hollow at dusk. In Drowned Hollow the water was cold; Mira did not care. Admiral did not appear.",
     highlights: ["@[Mira](" + E_MIRA + ") heard the bell under @[Drowned Hollow](" + E_HOLLOW + ")."],
     epilogue: "The bell kept ringing.",
-    bullet_summary: { key_events: ["Found @[Ghost Ship](" + E_GONE + ")"], action_items: ["Return to @[Drowned Hollow](" + E_HOLLOW + ")"], combat_highlights: [] },
+    bullet_summary: { key_events: ["Found @[Ghost Ship](" + E_GONE + ")"], action_items: ["Return to @[Drowned Hollow](" + E_HOLLOW + ")"], combat_highlights: [], funny_moments: ["[]", " "] },
   },
   [S2]: {
     ...recapBase, id: S2, started_at: sessions[1].started_at, duration_minutes: 180, title: "Lanterns: Over the Hollow?",

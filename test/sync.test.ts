@@ -62,6 +62,7 @@ describe("syncCampaign", () => {
     expect(s1).toContain("- Found Ghost Ship"); // unknown entity → plain text
     expect(s1).toContain(`- [ ] Return to [[${ROOT}/Lore/Locations/Drowned Hollow|Drowned Hollow]]`);
     expect(s1).not.toContain("Combat highlights");
+    expect(s1).not.toContain("Funny moments"); // placeholder "[]" entries dropped
 
     const mira = vault.files.get(`${ROOT}/Lore/Characters/Mira.md`)!;
     expect(mira).toContain('aliases: ["the diver"]');

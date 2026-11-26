@@ -196,8 +196,11 @@ export function renderSession(recap: SessionRecap, campaign: Campaign, links: Li
 
   const bs: BulletSummary = recap.bullet_summary ?? {};
   for (const [key, items] of Object.entries(bs)) {
-    if (!Array.isArray(items) || items.length === 0) continue;
-    const list = items.map((i) => (key === "action_items" ? `- [ ] ${convertRefs(i, links)}` : `- ${convertRefs(i, links)}`));
+    if (!Array.isArray(items)) continue;
+    // Upstream sometimes emits placeholder entries like "[]" for an empty list.
+    const real = items.filter((i) => typeof i === "string" && i.trim() !== "" && i.trim() !== "[]");
+    if (real.length === 0) continue;
+    const list = real.map((i) => (key === "action_items" ? `- [ ] ${convertRefs(i, links)}` : `- ${convertRefs(i, links)}`));
     parts.push(`## ${humanize(key)}`, list.join("\n"));
   }
 
