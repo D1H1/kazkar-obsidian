@@ -1,0 +1,10 @@
+{
+  "id": "kazkar",
+  "name": "Kazkar",
+  "version": "1.0.0",
+  "minAppVersion": "1.11.4",
+  "description": "Sync your tabletop RPG session recaps and lore wiki (NPCs, places, items, factions) from Kazkar into linked notes.",
+  "author": "Kazkar",
+  "authorUrl": "https://kazkar.ai",
+  "isDesktopOnly": false
+}
